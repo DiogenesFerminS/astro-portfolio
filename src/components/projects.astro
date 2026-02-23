@@ -1,0 +1,37 @@
+---
+import ProjectsCard from "./projects/projectsCard.astro"
+
+interface Project {
+  title: string
+  description: string
+  image: string
+} 
+
+const projects: Project[] = [
+    {
+        image: '/what-about.png',
+        title: 'What-about',
+        description: 'What about is a modern social network built with Next.js 16 (App Router). This project focuses on performance, security, and a seamless user experience using Server Actions and Optimistic UI.'
+    },
+    {
+        image: '/kura.png',
+        title: 'Kura',
+        description: 'Kura is a SaaS dedicated to medical record management, appointment management, and financial control for doctors and dentists, all in an intuitive and easy-to-use interface.'
+    }
+]
+
+---
+
+<section class="mt-2">
+  <div class="mb-4">
+    <span class="py-2 block text-2xl font-bold">My Projects</span>
+  </div>
+
+  <div class="flex justify-start items-center flex-col md:flex-row w-full gap-6">
+    {
+        projects.map((project) => (
+            <ProjectsCard title={project.title} description={project.description} image={project.image}/>
+        ))
+    }
+  </div>
+</section>
