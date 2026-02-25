@@ -1,14 +1,12 @@
 ---
-import About from "../components/about.astro";
+import IndexList from "../components/indexList.astro";
 import Layout from "../layouts/Layout.astro";
-import Projects from "../components/projects.astro";
 
 
 ---
 
 <Layout title="Fermin">
-    <main class="w-full">
-        <About/>
-        <Projects/>
+    <main class="w-full flex-1 flex flex-col justify-center">
+        <IndexList/>
     </main>
 </Layout>

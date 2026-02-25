@@ -1,0 +1,21 @@
+---
+import AboutHeader from "../components/aboutHeader.astro";
+import Layout from "../layouts/Layout.astro";
+import Projects from "../components/projects.astro";
+
+
+---
+
+<Layout title="Fermin">
+    <main class="w-full">
+          <div class="mb-2">
+            <span 
+                class="py-2 block text-2xl font-bold"
+                transition:name="title-about"
+                transition:animate="initial"
+            >About</span>
+        </div>
+        <AboutHeader/>
+        <Projects/>
+    </main>
+</Layout>

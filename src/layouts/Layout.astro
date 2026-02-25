@@ -1,4 +1,6 @@
 ---
+import { ClientRouter } from "astro:transitions"
+import Menu from "../components/menu/menu.astro"
 const {title} = Astro.props
 
 ---
@@ -10,8 +12,10 @@ const {title} = Astro.props
 		<meta name="generator" content={Astro.generator} />
 		<link rel="stylesheet" href="/src/styles/global.css">
 		<title>{title}</title>
+		<ClientRouter/>
 	</head>
-	<body class="bg-slate-900 max-w-3xl mx-auto p-3 text-slate-200">
+	<body class="bg-slate-900 max-w-3xl mx-auto p-3 text-slate-200 min-h-screen flex flex-col">
+		<Menu/>
 		<slot />
 	</body>
 </html>
