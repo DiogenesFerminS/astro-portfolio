@@ -1,0 +1,30 @@
+---
+import {
+  certifications,
+  type Certifications,
+} from "../data/certifications.data";
+---
+
+<section class="mt-4">
+  <div>
+    <ul>
+      {
+        certifications.map((cer) => (
+          <li>
+            <div class="flex flex-col justify-center items-start py-2 md:flex-row md:justify-between md:items-center">
+              <div>
+                <span class="md:text-lg">{cer.title}</span> - <span class="font-semibold">{cer.duration}</span>
+              </div>
+              <div class="mt-3 border border-slate-300 w-fit p-2 rounded-lg hover:bg-slate-600 transition-all">
+                <a 
+                    href={cer.image} 
+                    class="text-sm" target="_blank"
+                >View Certification</a>
+              </div>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>

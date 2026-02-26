@@ -1,0 +1,18 @@
+---
+import CertificationList from "../components/certificationList.astro";
+import Layout from "../layouts/Layout.astro";
+
+
+---
+
+<Layout title="Certifications | Fermin">
+    <main>
+        <h1
+            class="py-2 block text-2xl font-bold text-center"
+            transition:name="title-certifications"
+            transition:animate="initial"
+        >Certifications</h1>
+
+        <CertificationList/>
+    </main>
+</Layout>
