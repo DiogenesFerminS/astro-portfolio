@@ -11,15 +11,39 @@ import {
       {
         certifications.map((cer) => (
           <li>
-            <div class="flex flex-col justify-center items-start py-2 md:flex-row md:justify-between md:items-center">
+            <div class="flex py-2 flex-row justify-between items-center">
               <div>
-                <span class="md:text-lg">{cer.title}</span> - <span class="font-semibold">{cer.duration}</span>
+                <span class="md:text-lg">{cer.title}</span> -{" "}
+                <span class="font-semibold">{cer.duration}</span>
               </div>
-              <div class="mt-3 border border-slate-300 w-fit p-2 rounded-lg hover:bg-slate-600 transition-all">
-                <a 
-                    href={cer.image} 
-                    class="text-sm" target="_blank"
-                >View Certification</a>
+              <div>
+                <a
+                  href={cer.image}
+                  class="text-sm block mt-3 border border-slate-300 w-fit p-2 rounded-lg hover:bg-slate-600 transition-all"
+                  target="_blank"
+                >
+                  <span class="hidden lg:inline text-sm">
+                    View Certification
+                  </span>
+
+                  <div class="lg:hidden">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      class="lucide lucide-eye"
+                    >
+                      <path d="M2.062 12.348a1 1 0 0 1 0-.696 10.75 10.75 0 0 1 19.876 0 1 1 0 0 1 0 .696 10.75 10.75 0 0 1-19.876 0" />
+                      <circle cx="12" cy="12" r="3" />
+                    </svg>
+                  </div>
+                </a>
               </div>
             </div>
           </li>

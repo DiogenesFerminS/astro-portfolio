@@ -32,7 +32,7 @@ export const certifications: Certifications[] = [
     },
     {
         image: "https://res.cloudinary.com/dqclkzb8r/image/upload/v1772074179/nest_mr4hb0.jpg",
-        title: "NestJs A progressive Node.js framework",
+        title: "NestJs Node.js framework",
         duration: "24 hours"
     },
     {
