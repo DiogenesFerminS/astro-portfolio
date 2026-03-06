@@ -1,17 +1,5 @@
 @import "tailwindcss";
 
-@theme {
-  --font-sans: 'Montserrat', 'sans-serif';
-}
-
-@font-face {
-  font-family: 'Montserrat';
-  src: url('/fonts/Montserrat-VariableFont_wght.ttf') format('ttf');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
 html {
   /* Reserva el espacio para el scrollbar permanentemente */
   scrollbar-gutter: stable;
