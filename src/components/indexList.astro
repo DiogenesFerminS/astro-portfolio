@@ -3,24 +3,33 @@
 ---
 
 <section class="mt-8">
-    <div class="flex justify-center items-center h-full">
-        <ul>
-            <li class="py-2">
-                <a 
-                    href="/about"
-                    transition:name="title-about"
-                    transition:animate="none"
-                    class="font-bold text-lg p-2 hover:underline hover:text-xl transition-all"
-                >About</a>
-            </li>
-            <li class="py-2">
-                <a 
-                    href="/certifications"
-                    transition:name="title-certifications"
-                    transition:animate="none"
-                    class="font-bold text-lg p-2 hover:underline hover:text-xl transition-all"
-                >Certifications</a>
-            </li>
-        </ul>
-    </div>
+    <ul>
+        <li class="py-2">
+            <a 
+                href="/about"
+                transition:name="title-about"
+                transition:animate="none"
+                class="font-bold text-lg p-2 hover:underline transition-all animate-fade-in opacity-0"
+                style="animation-delay:0.1s;"
+            >About</a>
+        </li>
+        <li class="py-2">
+            <a 
+                href="/certifications"
+                transition:name="title-certifications"
+                transition:animate="none"
+                class="font-bold text-lg p-2 hover:underline transition-all animate-fade-in opacity-0"
+                style="animation-delay:0.2s;"
+            >Certifications</a>
+        </li>
+        <li class="py-2">
+            <a 
+                href="/other-projects"
+                transition:name="title-other-projects"
+                transition:animate="none"
+                class="font-bold text-lg p-2 hover:underline transition-all animate-fade-in opacity-0"
+                style="animation-delay:0.4s;"
+            >Other Projects</a>
+        </li>
+    </ul>
 </section>

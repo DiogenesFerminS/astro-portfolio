@@ -1,0 +1,15 @@
+---
+import ProjectsList from "../components/projectsList.astro";
+import Layout from "../layouts/Layout.astro";
+import {otherProjects} from "../data/other_projects"
+---
+
+<Layout title="Other Projects | Fermin">
+    <h1
+        class="py-2 block text-2xl font-bold"
+        transition:name="title-other-projects"
+        transition:animate="initial"
+    >Other projects</h1>
+
+    <ProjectsList projects={otherProjects}/>
+</Layout>
