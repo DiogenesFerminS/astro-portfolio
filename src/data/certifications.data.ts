@@ -54,5 +54,10 @@ export const certifications: Certifications[] = [
         image: "https://res.cloudinary.com/dqclkzb8r/image/upload/v1772074180/shadcn_nec9sn.png",
         title: "Shadcn styles library",
         duration: "6 hours"
+    },
+    {
+        image: "https://res.cloudinary.com/dqclkzb8r/image/upload/v1773022259/go_pz8lbx.jpg",
+        title: "Go",
+        duration: "15.5 hours"
     }
 ]
