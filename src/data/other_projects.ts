@@ -15,5 +15,10 @@ export const otherProjects: Project[] = [
         title: "API with Golang",
         description: "My first deep-dive into the Go ecosystem. I built a functional REST API using the Gin framework, focusing on secure endpoint protection through JWT and local data storage with SQLite. This project showcases my ability to adapt to new languages and implement industry-standard security patterns in record time.",
         link: "https://github.com/DiogenesFerminS/go-events-api"
+    },
+    {
+        title: "Website for an Engineering student",
+        description: "This is a high-performance landing page meticulously crafted for Arturo Liendo, a Chemical Engineer. The project serves as a centralized hub to showcase his professional journey, process optimization projects, and specialized technical skills through a clean, modern, and data-driven interface.",
+        demoLive: "https://arturoliendo.netlify.app/"
     }
 ]
