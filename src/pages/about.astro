@@ -2,20 +2,22 @@
 import AboutHeader from "../components/aboutHeader.astro";
 import Layout from "../layouts/Layout.astro";
 import Projects from "../components/projects.astro";
-
-
+import Experience from "../components/experience.astro";
 ---
 
 <Layout title="About | Fermin">
     <main class="w-full">
-          <div class="mb-2">
-            <h1 
+        <div class="mb-2">
+            <h1
                 class="py-2 block text-2xl font-bold"
                 transition:name="title-about"
                 transition:animate="initial"
-            >About</h1>
+            >
+                About
+            </h1>
         </div>
-        <AboutHeader/>
-        <Projects/>
+        <AboutHeader />
+        <Experience />
+        <Projects />
     </main>
 </Layout>
