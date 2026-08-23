@@ -8,17 +8,12 @@ export const otherProjects: Project[] = [
     },
     {
         title: "Enterprise PDF Generation Service",
-        description:"A robust backend service architected with NestJS and PostgreSQL, designed to automate the generation of complex corporate documents. Leveraging TypeORM for seamless relational data management and pdfMake for the rendering engine, the API enables dynamic PDF creation. Features include personalized employment certificates with real-time employee data injection, and comprehensive country reports filtered by unique identifiers directly from the database.",
+        description: "A robust backend service architected with NestJS and PostgreSQL, designed to automate the generation of complex corporate documents. Leveraging TypeORM for seamless relational data management and pdfMake for the rendering engine, the API enables dynamic PDF creation. Features include personalized employment certificates with real-time employee data injection, and comprehensive country reports filtered by unique identifiers directly from the database.",
         link: "https://github.com/DiogenesFerminS/reports_nestjs"
     },
     {
         title: "API with Golang",
         description: "My first deep-dive into the Go ecosystem. I built a functional REST API using the Gin framework, focusing on secure endpoint protection through JWT and local data storage with SQLite. This project showcases my ability to adapt to new languages and implement industry-standard security patterns in record time.",
         link: "https://github.com/DiogenesFerminS/go-events-api"
-    },
-    {
-        title: "Website for an Engineering student",
-        description: "This is a high-performance landing page meticulously crafted for Arturo Liendo, a Chemical Engineer. The project serves as a centralized hub to showcase his professional journey, process optimization projects, and specialized technical skills through a clean, modern, and data-driven interface.",
-        demoLive: "https://arturoliendo.netlify.app/"
     }
 ]

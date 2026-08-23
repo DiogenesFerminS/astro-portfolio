@@ -25,79 +25,105 @@ if (yearlyData) {
 
   {
     yearlyData && availableYears.length > 0 ? (
-      <div class="flex flex-col md:flex-row gap-4 items-start">
-        {/* Graphs Container */}
-        <div class="flex-1 w-full border border-slate-700 rounded-xl p-4 bg-slate-900 overflow-x-auto custom-scrollbar">
-          {availableYears.map((year, index) => {
-            const calendar = yearlyData[year];
-            return (
-              <div
-                class={`min-w-max graph-year-container ${index !== 0 ? "hidden" : ""}`}
-                data-year={year}
-              >
-                <div class="flex items-end gap-2 text-md text-slate-400 mb-2">
-                  <span>
-                    {calendar.totalContributions} contributions in {year}
-                  </span>
-                </div>
-                <div class="flex gap-2">
-                  <div class="grid grid-rows-7 gap-1 text-[10px] text-slate-400 mr-1">
-                    <div class="h-3 leading-3">Sun</div>
-                    <div class="h-3 leading-3">Mon</div>
-                    <div class="h-3 leading-3">Tue</div>
-                    <div class="h-3 leading-3">Wed</div>
-                    <div class="h-3 leading-3">Thu</div>
-                    <div class="h-3 leading-3">Fri</div>
-                    <div class="h-3 leading-3">Sat</div>
-                  </div>
-
-                  <div class="grid grid-rows-7 gap-1 grid-flow-col">
-                    {calendar.weeks.map((week) => (
-                      Array.from({ length: 7 }).map((_, dayIndex) => {
-                          const day = week.contributionDays.find(d => d.weekday === dayIndex);
-                          if (!day) {
-                              return <div class="w-3 h-3 rounded-sm bg-transparent"></div>;
-                          }
-                          return (
-                              <div
-                                  class={`w-3 h-3 rounded-sm ${getContributionColor(day.contributionCount)}`}
-                                  title={`${day.contributionCount} contributions on ${day.date}`}
-                              ></div>
-                          );
-                      })
-                    ))}
-                  </div>
-                </div>
-                <div class="flex items-center justify-end gap-1 mt-4 text-xs text-slate-400">
-                  <span>Less</span>
-                  <div class="w-3 h-3 rounded-sm bg-slate-800" />
-                  <div class="w-3 h-3 rounded-sm bg-green-900" />
-                  <div class="w-3 h-3 rounded-sm bg-green-700" />
-                  <div class="w-3 h-3 rounded-sm bg-green-500" />
-                  <div class="w-3 h-3 rounded-sm bg-green-400" />
-                  <span>More</span>
-                </div>
-              </div>
-            );
-          })}
+      <div class="relative">
+        {/* Skeleton Loader */}
+        <div
+          id="github-skeleton"
+          class="flex flex-col md:flex-row gap-4 items-start w-full"
+        >
+          <div class="flex-1 w-full border border-slate-700 rounded-xl p-4 bg-slate-900 h-[180px] animate-pulse flex flex-col justify-between">
+            <div class="w-1/3 h-4 bg-slate-800 rounded" />
+            <div class="w-full h-24 bg-slate-800 rounded mt-4" />
+            <div class="w-1/4 h-3 bg-slate-800 rounded self-end mt-4" />
+          </div>
+          <div class="flex md:flex-col gap-2 w-full md:w-20">
+            <div class="h-9 w-full bg-slate-800 rounded-lg animate-pulse" />
+            <div class="h-9 w-full bg-slate-800 rounded-lg animate-pulse hidden md:block" />
+            <div class="h-9 w-full bg-slate-800 rounded-lg animate-pulse hidden md:block" />
+          </div>
         </div>
 
-        {/* Year Buttons */}
-        <div class="flex md:flex-col gap-2 overflow-x-auto custom-scrollbar md:overflow-visible w-full md:w-auto">
-          {availableYears.map((year, index) => (
-            <button
-              class={`year-btn px-4 py-2 text-sm rounded-lg border transition-colors whitespace-nowrap ${index === 0 ? "bg-slate-700 border-slate-600 text-white" : "bg-transparent border-transparent text-slate-400 hover:bg-slate-800 hover:text-slate-200"}`}
-              data-target-year={year}
-            >
-              {year}
-            </button>
-          ))}
+        {/* Actual Graph (Hidden initially) */}
+        <div
+          id="github-graph"
+          class="hidden flex-col md:flex-row gap-4 items-start animate-fade-in"
+        >
+          {/* Graphs Container */}
+          <div class="flex-1 w-full border border-slate-700 rounded-xl p-4 bg-slate-900 overflow-x-auto custom-scrollbar">
+            {availableYears.map((year, index) => {
+              const calendar = yearlyData[year];
+              return (
+                <div
+                  class={`min-w-max graph-year-container ${index !== 0 ? "hidden" : ""}`}
+                  data-year={year}
+                >
+                  <div class="flex items-end gap-2 text-md text-slate-400 mb-2">
+                    <span>
+                      {calendar.totalContributions} contributions in {year}
+                    </span>
+                  </div>
+                  <div class="flex gap-2">
+                    <div class="grid grid-rows-7 gap-1 text-[10px] text-slate-400 mr-1">
+                      <div class="h-3 leading-3">Sun</div>
+                      <div class="h-3 leading-3">Mon</div>
+                      <div class="h-3 leading-3">Tue</div>
+                      <div class="h-3 leading-3">Wed</div>
+                      <div class="h-3 leading-3">Thu</div>
+                      <div class="h-3 leading-3">Fri</div>
+                      <div class="h-3 leading-3">Sat</div>
+                    </div>
+
+                    <div class="grid grid-rows-7 gap-1 grid-flow-col">
+                      {calendar.weeks.map((week) =>
+                        Array.from({ length: 7 }).map((_, dayIndex) => {
+                          const day = week.contributionDays.find(
+                            (d) => d.weekday === dayIndex,
+                          );
+                          if (!day) {
+                            return (
+                              <div class="w-3 h-3 rounded-sm bg-transparent" />
+                            );
+                          }
+                          return (
+                            <div
+                              class={`w-3 h-3 rounded-sm ${getContributionColor(day.contributionCount)}`}
+                              title={`${day.contributionCount} contributions on ${day.date}`}
+                            />
+                          );
+                        }),
+                      )}
+                    </div>
+                  </div>
+                  <div class="flex items-center justify-end gap-1 mt-4 text-xs text-slate-400">
+                    <span>Less</span>
+                    <div class="w-3 h-3 rounded-sm bg-slate-800" />
+                    <div class="w-3 h-3 rounded-sm bg-green-900" />
+                    <div class="w-3 h-3 rounded-sm bg-green-700" />
+                    <div class="w-3 h-3 rounded-sm bg-green-500" />
+                    <div class="w-3 h-3 rounded-sm bg-green-400" />
+                    <span>More</span>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Year Buttons */}
+          <div class="flex md:flex-col gap-2 overflow-x-auto custom-scrollbar md:overflow-visible w-full md:w-auto">
+            {availableYears.map((year, index) => (
+              <button
+                class={`year-btn px-4 py-2 text-sm rounded-lg border transition-colors whitespace-nowrap ${index === 0 ? "bg-slate-700 border-slate-600 text-white" : "bg-transparent border-transparent text-slate-400 hover:bg-slate-800 hover:text-slate-200"}`}
+                data-target-year={year}
+              >
+                {year}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
     ) : (
       <div class="p-4 border border-slate-700 rounded-xl text-center text-slate-500">
-        Could not load GitHub contributions. Please check your token and
-        username.
+        Could not load GitHub contributions. Sorry :(
       </div>
     )
   }
@@ -105,6 +131,19 @@ if (yearlyData) {
 
 <script>
   document.addEventListener("astro:page-load", () => {
+    // Skeleton logic
+    const skeleton = document.getElementById("github-skeleton");
+    const graph = document.getElementById("github-graph");
+
+    if (skeleton && graph) {
+      setTimeout(() => {
+        skeleton.classList.add("hidden");
+        graph.classList.remove("hidden");
+        graph.classList.add("flex");
+      }, 1500); // 1.5 seconds loading effect
+    }
+
+    // Tabs logic
     const buttons = document.querySelectorAll(".year-btn");
     const containers = document.querySelectorAll(".graph-year-container");
 

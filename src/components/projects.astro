@@ -1,7 +1,12 @@
 ---
-import {type Project} from "../interfaces/projects"
+import { type Project } from "../interfaces/projects";
 import ProjectsList from "./projectsList.astro";
 const projects: Project[] = [
+  {
+    title: "Kura v1 Saas",
+    description:
+      "An all-in-one clinical management SaaS engineered for healthcare professionals. Built with Next.js and NestJS, it streamlines end-to-end medical practice operations, including patient records, appointment scheduling, and financial tracking. The platform integrates Cloudflare R2 for secure, scalable medical document storage and Resend for transactional email notifications.",
+  },
   {
     title: "What-about v1",
     link: "https://github.com/DiogenesFerminS/what-about-frontend",
@@ -37,7 +42,7 @@ const projects: Project[] = [
         </div>
       </li>
 
-     <ProjectsList projects={projects}/>
+      <ProjectsList projects={projects} />
     </ul>
   </div>
 </section>
