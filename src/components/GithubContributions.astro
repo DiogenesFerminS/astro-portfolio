@@ -1,0 +1,163 @@
+---
+import { getGithubContributions } from "../data/github";
+
+const username = "DiogenesFerminS";
+const yearlyData = await getGithubContributions(username);
+
+const getContributionColor = (count: number) => {
+  if (count === 0) return "bg-slate-800";
+  if (count <= 3) return "bg-green-900";
+  if (count <= 6) return "bg-green-700";
+  if (count <= 9) return "bg-green-500";
+  return "bg-green-400";
+};
+
+let availableYears: number[] = [];
+if (yearlyData) {
+  availableYears = Object.keys(yearlyData)
+    .map(Number)
+    .sort((a, b) => b - a);
+}
+---
+
+<section class="mt-8 mb-4">
+  <h2 class="text-xl font-bold mb-4">GitHub Contributions</h2>
+
+  {
+    yearlyData && availableYears.length > 0 ? (
+      <div class="flex flex-col md:flex-row gap-4 items-start">
+        {/* Graphs Container */}
+        <div class="flex-1 w-full border border-slate-700 rounded-xl p-4 bg-slate-900 overflow-x-auto custom-scrollbar">
+          {availableYears.map((year, index) => {
+            const calendar = yearlyData[year];
+            return (
+              <div
+                class={`min-w-max graph-year-container ${index !== 0 ? "hidden" : ""}`}
+                data-year={year}
+              >
+                <div class="flex items-end gap-2 text-md text-slate-400 mb-2">
+                  <span>
+                    {calendar.totalContributions} contributions in {year}
+                  </span>
+                </div>
+                <div class="flex gap-2">
+                  <div class="grid grid-rows-7 gap-1 text-[10px] text-slate-400 mr-1 mt-6">
+                    <div class="h-3 leading-3" />
+                    <div class="h-3 leading-3">Mon</div>
+                    <div class="h-3 leading-3" />
+                    <div class="h-3 leading-3">Wed</div>
+                    <div class="h-3 leading-3" />
+                    <div class="h-3 leading-3">Fri</div>
+                    <div class="h-3 leading-3" />
+                  </div>
+
+                  <div class="grid grid-rows-7 gap-1 grid-flow-col">
+                    {calendar.weeks.map((week) =>
+                      week.contributionDays.map((day) => (
+                        <div
+                          class={`w-3 h-3 rounded-sm ${getContributionColor(day.contributionCount)}`}
+                          title={`${day.contributionCount} contributions on ${day.date}`}
+                        />
+                      )),
+                    )}
+                  </div>
+                </div>
+                <div class="flex items-center justify-end gap-1 mt-4 text-xs text-slate-400">
+                  <span>Less</span>
+                  <div class="w-3 h-3 rounded-sm bg-slate-800" />
+                  <div class="w-3 h-3 rounded-sm bg-green-900" />
+                  <div class="w-3 h-3 rounded-sm bg-green-700" />
+                  <div class="w-3 h-3 rounded-sm bg-green-500" />
+                  <div class="w-3 h-3 rounded-sm bg-green-400" />
+                  <span>More</span>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+
+        {/* Year Buttons */}
+        <div class="flex md:flex-col gap-2 overflow-x-auto custom-scrollbar md:overflow-visible w-full md:w-auto">
+          {availableYears.map((year, index) => (
+            <button
+              class={`year-btn px-4 py-2 text-sm rounded-lg border transition-colors whitespace-nowrap ${index === 0 ? "bg-slate-700 border-slate-600 text-white" : "bg-transparent border-transparent text-slate-400 hover:bg-slate-800 hover:text-slate-200"}`}
+              data-target-year={year}
+            >
+              {year}
+            </button>
+          ))}
+        </div>
+      </div>
+    ) : (
+      <div class="p-4 border border-slate-700 rounded-xl text-center text-slate-500">
+        Could not load GitHub contributions. Please check your token and
+        username.
+      </div>
+    )
+  }
+</section>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const buttons = document.querySelectorAll(".year-btn");
+    const containers = document.querySelectorAll(".graph-year-container");
+
+    buttons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        const targetYear = btn.getAttribute("data-target-year");
+
+        containers.forEach((container) => {
+          if (container.getAttribute("data-year") === targetYear) {
+            container.classList.remove("hidden");
+          } else {
+            container.classList.add("hidden");
+          }
+        });
+
+        buttons.forEach((b) => {
+          if (b === btn) {
+            b.classList.add("bg-slate-700", "border-slate-600", "text-white");
+            b.classList.remove(
+              "bg-transparent",
+              "border-transparent",
+              "text-slate-400",
+            );
+          } else {
+            b.classList.remove(
+              "bg-slate-700",
+              "border-slate-600",
+              "text-white",
+            );
+            b.classList.add(
+              "bg-transparent",
+              "border-transparent",
+              "text-slate-400",
+            );
+          }
+        });
+      });
+    });
+  });
+</script>
+
+<style>
+  .custom-scrollbar::-webkit-scrollbar {
+    height: 6px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-track {
+    background: #0f172a;
+    border-radius: 8px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #334155;
+    border-radius: 8px;
+  }
+  .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #475569;
+  }
+
+  .custom-scrollbar {
+    scrollbar-width: thin;
+    scrollbar-color: #334155 #0f172a;
+  }
+</style>
