@@ -1,6 +1,7 @@
 export interface ContributionDay {
   contributionCount: number;
   date: string;
+  weekday: number;
 }
 
 export interface ContributionWeek {
@@ -65,6 +66,7 @@ export async function getGithubContributions(username: string): Promise<YearlyCo
               contributionDays {
                 contributionCount
                 date
+                weekday
               }
             }
           }

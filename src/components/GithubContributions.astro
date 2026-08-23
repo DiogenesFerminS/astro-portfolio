@@ -41,25 +41,31 @@ if (yearlyData) {
                   </span>
                 </div>
                 <div class="flex gap-2">
-                  <div class="grid grid-rows-7 gap-1 text-[10px] text-slate-400 mr-1 mt-6">
-                    <div class="h-3 leading-3" />
+                  <div class="grid grid-rows-7 gap-1 text-[10px] text-slate-400 mr-1">
+                    <div class="h-3 leading-3">Sun</div>
                     <div class="h-3 leading-3">Mon</div>
-                    <div class="h-3 leading-3" />
+                    <div class="h-3 leading-3">Tue</div>
                     <div class="h-3 leading-3">Wed</div>
-                    <div class="h-3 leading-3" />
+                    <div class="h-3 leading-3">Thu</div>
                     <div class="h-3 leading-3">Fri</div>
-                    <div class="h-3 leading-3" />
+                    <div class="h-3 leading-3">Sat</div>
                   </div>
 
                   <div class="grid grid-rows-7 gap-1 grid-flow-col">
-                    {calendar.weeks.map((week) =>
-                      week.contributionDays.map((day) => (
-                        <div
-                          class={`w-3 h-3 rounded-sm ${getContributionColor(day.contributionCount)}`}
-                          title={`${day.contributionCount} contributions on ${day.date}`}
-                        />
-                      )),
-                    )}
+                    {calendar.weeks.map((week) => (
+                      Array.from({ length: 7 }).map((_, dayIndex) => {
+                          const day = week.contributionDays.find(d => d.weekday === dayIndex);
+                          if (!day) {
+                              return <div class="w-3 h-3 rounded-sm bg-transparent"></div>;
+                          }
+                          return (
+                              <div
+                                  class={`w-3 h-3 rounded-sm ${getContributionColor(day.contributionCount)}`}
+                                  title={`${day.contributionCount} contributions on ${day.date}`}
+                              ></div>
+                          );
+                      })
+                    ))}
                   </div>
                 </div>
                 <div class="flex items-center justify-end gap-1 mt-4 text-xs text-slate-400">
