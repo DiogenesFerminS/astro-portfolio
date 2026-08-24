@@ -1,6 +1,11 @@
 ---
 import { getGithubContributions } from "../data/github";
 
+Astro.response.headers.set(
+  "Cache-Control",
+  "public, max-age=3600, s-maxage=3600",
+);
+
 const username = "DiogenesFerminS";
 const yearlyData = await getGithubContributions(username);
 
@@ -26,27 +31,10 @@ if (yearlyData) {
   {
     yearlyData && availableYears.length > 0 ? (
       <div class="relative">
-        {/* Skeleton Loader */}
-        <div
-          id="github-skeleton"
-          class="flex flex-col md:flex-row gap-4 items-start w-full"
-        >
-          <div class="flex-1 w-full border border-slate-700 rounded-xl p-4 bg-slate-900 h-[180px] animate-pulse flex flex-col justify-between">
-            <div class="w-1/3 h-4 bg-slate-800 rounded" />
-            <div class="w-full h-24 bg-slate-800 rounded mt-4" />
-            <div class="w-1/4 h-3 bg-slate-800 rounded self-end mt-4" />
-          </div>
-          <div class="flex md:flex-col gap-2 w-full md:w-20">
-            <div class="h-9 w-full bg-slate-800 rounded-lg animate-pulse" />
-            <div class="h-9 w-full bg-slate-800 rounded-lg animate-pulse hidden md:block" />
-            <div class="h-9 w-full bg-slate-800 rounded-lg animate-pulse hidden md:block" />
-          </div>
-        </div>
-
-        {/* Actual Graph (Hidden initially) */}
+        {/* Actual Graph */}
         <div
           id="github-graph"
-          class="hidden flex-col md:flex-row gap-4 items-start animate-fade-in"
+          class="flex flex-col md:flex-row gap-4 items-start animate-fade-in"
         >
           {/* Graphs Container */}
           <div class="flex-1 w-full border border-slate-700 rounded-xl p-4 bg-slate-900 overflow-x-auto custom-scrollbar">
@@ -131,18 +119,6 @@ if (yearlyData) {
 
 <script>
   document.addEventListener("astro:page-load", () => {
-    // Skeleton logic
-    const skeleton = document.getElementById("github-skeleton");
-    const graph = document.getElementById("github-graph");
-
-    if (skeleton && graph) {
-      setTimeout(() => {
-        skeleton.classList.add("hidden");
-        graph.classList.remove("hidden");
-        graph.classList.add("flex");
-      }, 1500); // 1.5 seconds loading effect
-    }
-
     // Tabs logic
     const buttons = document.querySelectorAll(".year-btn");
     const containers = document.querySelectorAll(".graph-year-container");
