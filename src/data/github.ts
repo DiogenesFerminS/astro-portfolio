@@ -18,10 +18,11 @@ export interface YearlyContributions {
 }
 
 export async function getGithubContributions(username: string): Promise<YearlyContributions | null> {
-  const token = import.meta.env.GITHUB_TOKEN;
+  // @ts-ignore - process might not be defined in all environments
+  const token = import.meta.env.GITHUB_TOKEN || (typeof process !== 'undefined' ? process.env.GITHUB_TOKEN : undefined);
 
   if (!token) {
-    console.error("GITHUB_TOKEN is not defined in .env");
+    console.error("GITHUB_TOKEN is not defined in the environment variables!");
     return null;
   }
 
