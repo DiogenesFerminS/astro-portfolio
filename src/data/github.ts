@@ -20,15 +20,10 @@ export interface YearlyContributions {
 }
 
 export async function getGithubContributions(username: string): Promise<YearlyContributions | null> {
-  // Se resuelve en cada request dentro de la funcion de Netlify (no se inlinea al build).
   const token = GITHUB_TOKEN;
 
   if (!token) {
-    console.error(
-      "[github] GITHUB_TOKEN no esta definido en runtime. " +
-        "Definilo en Netlify > Site configuration > Environment variables " +
-        "(scope: Functions) y volve a desplegar.",
-    );
+    console.error("GITHUB_TOKEN not defined. Check .env file and restart the server.");
     return null;
   }
 

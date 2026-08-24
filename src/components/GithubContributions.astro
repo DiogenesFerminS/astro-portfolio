@@ -1,8 +1,6 @@
 ---
 import { getGithubContributions } from "../data/github";
 
-// Server island: se renderiza en cada request. Sin esto, el CDN de Netlify y el
-// navegador cachean la respuesta GET de /_server-islands/* y los datos quedan viejos.
 Astro.response.headers.set("Cache-Control", "no-store");
 Astro.response.headers.set("Netlify-CDN-Cache-Control", "no-store");
 
