@@ -30,7 +30,7 @@ if (yearlyData) {
 
   {
     yearlyData && availableYears.length > 0 ? (
-      <div class="relative">
+      <github-contributions class="relative block">
         {/* Actual Graph */}
         <div
           id="github-graph"
@@ -108,7 +108,7 @@ if (yearlyData) {
             ))}
           </div>
         </div>
-      </div>
+      </github-contributions>
     ) : (
       <div class="p-4 border border-slate-700 rounded-xl text-center text-slate-500">
         Could not load GitHub contributions. Sorry :(
@@ -118,47 +118,53 @@ if (yearlyData) {
 </section>
 
 <script>
-  document.addEventListener("astro:page-load", () => {
-    // Tabs logic
-    const buttons = document.querySelectorAll(".year-btn");
-    const containers = document.querySelectorAll(".graph-year-container");
+  class GithubContributions extends HTMLElement {
+    connectedCallback() {
+      // Tabs logic
+      const buttons = this.querySelectorAll(".year-btn");
+      const containers = this.querySelectorAll(".graph-year-container");
 
-    buttons.forEach((btn) => {
-      btn.addEventListener("click", () => {
-        const targetYear = btn.getAttribute("data-target-year");
+      buttons.forEach((btn) => {
+        btn.addEventListener("click", () => {
+          const targetYear = btn.getAttribute("data-target-year");
 
-        containers.forEach((container) => {
-          if (container.getAttribute("data-year") === targetYear) {
-            container.classList.remove("hidden");
-          } else {
-            container.classList.add("hidden");
-          }
-        });
+          containers.forEach((container) => {
+            if (container.getAttribute("data-year") === targetYear) {
+              container.classList.remove("hidden");
+            } else {
+              container.classList.add("hidden");
+            }
+          });
 
-        buttons.forEach((b) => {
-          if (b === btn) {
-            b.classList.add("bg-slate-700", "border-slate-600", "text-white");
-            b.classList.remove(
-              "bg-transparent",
-              "border-transparent",
-              "text-slate-400",
-            );
-          } else {
-            b.classList.remove(
-              "bg-slate-700",
-              "border-slate-600",
-              "text-white",
-            );
-            b.classList.add(
-              "bg-transparent",
-              "border-transparent",
-              "text-slate-400",
-            );
-          }
+          buttons.forEach((b) => {
+            if (b === btn) {
+              b.classList.add("bg-slate-700", "border-slate-600", "text-white");
+              b.classList.remove(
+                "bg-transparent",
+                "border-transparent",
+                "text-slate-400",
+              );
+            } else {
+              b.classList.remove(
+                "bg-slate-700",
+                "border-slate-600",
+                "text-white",
+              );
+              b.classList.add(
+                "bg-transparent",
+                "border-transparent",
+                "text-slate-400",
+              );
+            }
+          });
         });
       });
-    });
-  });
+    }
+  }
+
+  if (!customElements.get("github-contributions")) {
+    customElements.define("github-contributions", GithubContributions);
+  }
 </script>
 
 <style>
